@@ -17,5 +17,9 @@
     "app",
     "config",
     "app.js"
-  ]
+  ],
+  "scritps": {
+    "version": "git add -A .",
+    "postversion": "git push && git push --tags"
+  }
 }
