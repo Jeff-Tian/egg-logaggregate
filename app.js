@@ -14,7 +14,7 @@ module.exports = app => {
         log(level, args, meta) {
             fs.appendFileSync(app.config.logaggregate.path, JSON.stringify({
                 "@appname": app.config.logaggregate.appName,
-                "@env": process.env.NODE_ENV,
+                "@env": app.config.env || process.env.NODE_ENV,
                 "@servername": (meta || {}).hostname,
                 "@timestamp": new Date(Date.now()),
                 level,
