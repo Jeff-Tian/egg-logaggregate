@@ -1,0 +1,21 @@
+{
+  "name": "egg-logaggregate",
+  "version": "0.0.1",
+  "eggPlugin": {
+    "name": "logaggregate",
+    "dep": [
+    ]
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "logger",
+    "logaggregate"
+  ],
+  "files": [
+    "app",
+    "config",
+    "app.js"
+  ]
+}
