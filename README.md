@@ -1,13 +1,24 @@
 # egg-logaggregate
+> aggregate egg project's logs to [Ali sls console](https://sls.console.aliyun.com).
 
 ## Why?
-Aggregate all egg log into a single file, and integrate with Ali Sls console.
+Aggregate egg app log and error log into a single file, which uses a dedicated json format, so that it can be easily 
+integrated with [Ali sls console](https://sls.console.aliyun.com).
 
 |Egg logs| --> |Aggregated log|
 |--------|-----|--------------|
-|common.error.log<br />egg-agent.log<br />egg-schedule.log<br />egg-web.log<br />${appInfo.name}-web.log| --> |aggregate.json.log|
+|${appInfo.name}-web.log| --> |aggregate.json.log|
+|common-error.log| --> | aggregate-error.json.log|
 
 ![Ali Sls console](./ali-sls.png)
+
+## How?
+It adds extra log transports which append extra fields to the log file in json format:
+- @env
+- @appname
+- @timestamp
+
+By appending these extra fields, the Ali sls console can display the project logs.
 
 ## Installation
 ```shell
@@ -33,6 +44,7 @@ export default (appInfo: EggAppInfo) => {
         //...
         config.logaggregate = {
             path: 'logs/xxx.log',
+            errorPath: 'logs/xxx-error.log',
             appName: appInfo.name
         }
         //...
