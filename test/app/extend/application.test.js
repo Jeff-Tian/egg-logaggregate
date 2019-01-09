@@ -23,6 +23,7 @@ describe('test/app/extend/application.test.js', () => {
     const testLogger = ctx.getLogger('aliLogger');
 
     testLogger.warn('this is a custom context logger');
+    testLogger.error('test error');
 
     // assert
     app.expectLog(/@env/, 'aliLogger');

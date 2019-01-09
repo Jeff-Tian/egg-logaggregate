@@ -5,6 +5,11 @@ module.exports = appInfo => {
 
   const config = {};
 
+  config.logger = {
+    ...config.logger,
+    outputJSON: true,
+  };
+
   config.customLogger = {
     aliLogger: {
       file: 'egg-web.json.log',
