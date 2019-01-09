@@ -1,23 +1,11 @@
 'use strict';
 
 module.exports = appInfo => {
-  console.log(appInfo);
+    const config = {};
 
-  const config = {};
-
-  config.logger = {
-    ...config.logger,
-    outputJSON: false,
-  };
-
-  config.customLogger = {
-    appLogger: {
-      file: 'egg-web.json.log',
-      contextFormatter(meta) {
-        return JSON.stringify({ ...meta, '@env': 'test', '@appname': appInfo.name, '@timestamp': new Date() });
-      },
-    },
-  };
-
-  return config;
-};
+    config.logaggregate = {
+        path: "logs/uni-academy-bff/uni-academy-bff-aggregate.json.log",
+        errorPath: "logs/uni-academy-bff/uni-academy-bff-aggregate-error.json.log",
+        appName: appInfo.name
+    };
+}
