@@ -7,11 +7,11 @@ module.exports = appInfo => {
 
   config.logger = {
     ...config.logger,
-    outputJSON: true,
+    outputJSON: false,
   };
 
   config.customLogger = {
-    aliLogger: {
+    appLogger: {
       file: 'egg-web.json.log',
       contextFormatter(meta) {
         return JSON.stringify({ ...meta, '@env': 'test', '@appname': appInfo.name, '@timestamp': new Date() });

@@ -17,17 +17,17 @@ describe('test/app/extend/application.test.js', () => {
   });
 
   it('should custom context logger', () => {
-    app.mockLog('aliLogger');
+    app.mockLog('appLogger');
 
     const ctx = app.mockContext({ url: '/custom' });
-    const testLogger = ctx.getLogger('aliLogger');
+    const testLogger = ctx.getLogger('appLogger');
 
     testLogger.warn('this is a custom context logger');
     testLogger.error('test error');
 
     // assert
-    app.expectLog(/@env/, 'aliLogger');
-    app.expectLog(/@appname/, 'aliLogger');
-    app.expectLog(/@timestamp/, 'aliLogger');
+    app.expectLog(/@env/, 'appLogger');
+    app.expectLog(/@appname/, 'appLogger');
+    app.expectLog(/@timestamp/, 'appLogger');
   });
 });
