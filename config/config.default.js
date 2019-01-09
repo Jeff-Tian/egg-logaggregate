@@ -1,4 +1,18 @@
-exports.logaggregate = {
-  path: "logs/uni-academy-bff/uni-academy-bff-aggregate.json.log",
-  appName: "uni-academy-bff"
+'use strict';
+
+module.exports = appInfo => {
+  console.log(appInfo);
+
+  const config = {};
+
+  config.customLogger = {
+    aliLogger: {
+      file: 'egg-web.json.log',
+      contextFormatter(meta) {
+        return JSON.stringify({ ...meta, '@env': 'test', '@appname': appInfo.name, '@timestamp': new Date() });
+      },
+    },
+  };
+
+  return config;
 };
