@@ -3,36 +3,33 @@
 const FileTransport = require('egg-logger').FileTransport;
 const fs = require('fs');
 
+function aliSlsLogTo(app, file) {
+  return function aliSlsLog(level, args, meta) {
+    fs.appendFile(file, JSON.stringify({
+      '@appname': app.name,
+      '@env': app.config.env || process.env.NODE_ENV,
+      '@servername': (meta || {}).hostname,
+      '@timestamp': new Date(Date.now()),
+      level,
+      args,
+      meta,
+    }) + '\n', () => {
+    });
+  };
+}
+
 module.exports = app => {
   class AggregateTransport extends FileTransport {
     log(level, args, meta) {
       if (level !== 'ERROR') {
-        fs.appendFile(this.options.file, JSON.stringify({
-          '@appname': app.name,
-          '@env': app.config.env || process.env.NODE_ENV,
-          '@servername': (meta || {}).hostname,
-          '@timestamp': new Date(Date.now()),
-          level,
-          args,
-          meta,
-        }) + '\n', () => {
-        });
+        aliSlsLogTo(app, this.options.file)(level, args, meta);
       }
     }
   }
 
   class AggregateErrorTransport extends FileTransport {
     log(level, args, meta) {
-      fs.appendFile(this.options.file, JSON.stringify({
-        '@appname': app.name,
-        '@env': app.config.env || process.env.NODE_ENV,
-        '@servername': (meta || {}).hostname,
-        '@timestamp': new Date(Date.now()),
-        level,
-        args,
-        meta,
-      }) + '\n', () => {
-      });
+      aliSlsLogTo(app, this.options.file)(level, args, meta);
     }
   }
 
