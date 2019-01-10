@@ -15,7 +15,8 @@ module.exports = app => {
           level,
           args,
           meta,
-        }) + '\n');
+        }) + '\n', () => {
+        });
       }
     }
   }
@@ -30,7 +31,8 @@ module.exports = app => {
         level,
         args,
         meta,
-      }) + '\n');
+      }) + '\n', () => {
+      });
     }
   }
 
