@@ -17,6 +17,7 @@ It adds extra log transports which append extra fields to the log file in json f
 - @env
 - @appname
 - @timestamp
+- @servername
 
 By appending these extra fields, the Ali sls console can display the project logs.
 
@@ -41,11 +42,12 @@ In egg project's config/config.{env}.ts:
 ```typescript
 export default (appInfo: EggAppInfo) => {
     return {
-        //...
+        // optional
         config.logaggregate = {
+            // default to path.join(appInfo.root, 'logs', appInfo.name, 'aggregate.json.log')
             path: 'logs/xxx.log',
+            // default to path.join(appInfo.root, 'logs', appInfo.name, 'aggregate-error.json.log')
             errorPath: 'logs/xxx-error.log',
-            appName: appInfo.name
         }
         //...
     }
