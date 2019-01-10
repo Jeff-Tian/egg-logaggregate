@@ -26,7 +26,7 @@ By appending these extra fields, the Ali sls console can display the project log
 npm install egg-logaggregate --save
 ```
 
-## Usage
+## Enable in your project:
 In egg project's config/plugin.ts
 ```typescript
 export default const plugin: EggPlugin = {
@@ -38,7 +38,10 @@ export default const plugin: EggPlugin = {
     //...
 }
 ``` 
-In egg project's config/config.{env}.ts:
+## Configuration/Customization:
+This plugin is zero configuration, in other words, as soon as you installed and enabled it, then it works.
+
+However, you can customized it by overwrite in egg project's config/config.{env}.ts:
 ```typescript
 export default (appInfo: EggAppInfo) => {
     return {
