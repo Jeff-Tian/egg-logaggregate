@@ -1,11 +1,16 @@
 'use strict';
 
-module.exports = appInfo => {
-    const config = {};
+const path = require('path');
 
-    config.logaggregate = {
-        path: "logs/uni-academy-bff/uni-academy-bff-aggregate.json.log",
-        errorPath: "logs/uni-academy-bff/uni-academy-bff-aggregate-error.json.log",
-        appName: appInfo.name
-    };
-}
+module.exports = appInfo => {
+  const config = {};
+
+  const logDir = path.join(appInfo.root, 'logs', appInfo.name);
+
+  config.logaggregate = {
+    path: `${path.join(logDir, 'aggregate.json.log')}`,
+    errorPath: `${path.join(logDir, 'aggregate-error.json.log')}`,
+  };
+
+  return config;
+};
