@@ -1,22 +1,7 @@
 'use strict';
-
+// TODO: Delete this file in next version
 const FileTransport = require('egg-logger').FileTransport;
-const fs = require('fs');
-
-function aliSlsLogTo(app, file) {
-  return function aliSlsLog(level, args, meta) {
-    fs.appendFile(file, JSON.stringify({
-      '@appname': app.name,
-      '@env': app.config.env || process.env.NODE_ENV,
-      '@servername': (meta || {}).hostname,
-      '@timestamp': new Date(Date.now()),
-      level,
-      args,
-      meta,
-    }) + '\n', () => {
-    });
-  };
-}
+const aliSlsLogTo = require('./aliSlsLogTo');
 
 module.exports = app => {
   class AggregateTransport extends FileTransport {
@@ -34,7 +19,7 @@ module.exports = app => {
   }
 
   app.beforeStart(async () => {
-    app.getLogger('logger').set('aggregate', new AggregateTransport(
+    app.getLogger('aliSlsLogger').set('aggregate', new AggregateTransport(
       { level: 'INFO', file: app.config.logaggregate.path }));
 
     app.getLogger('errorLogger')
