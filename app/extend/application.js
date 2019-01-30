@@ -17,7 +17,7 @@ class ContextLogger {
 
   contextFormatter(meta) {
     const { ctx, date, level, pid, message } = meta;
-    return `[${meta['@appname']}] [${meta['@env']}] [${meta['@servername']}] [${meta['@timestamp']}] [${date}] [${pid}] [${level}] [${ctx.url}] ${message}`;
+    return `[${meta['@appname']}] [${meta['@env']}] [${meta['@region']}] [${meta['@servername']}] [${meta['@timestamp']}] [${date}] [${pid}] [${level}] [${ctx.url}] ${message}`;
   }
 }
 
@@ -31,6 +31,7 @@ class ContextLogger {
       '@env': this.ctx.app.env,
       '@servername': this.ctx.hostname,
       '@timestamp': new Date(),
+      '@region': process.env.REGION || null,
     };
     this._logger.log(LEVEL, arguments, meta);
   };

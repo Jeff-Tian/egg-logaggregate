@@ -38,6 +38,8 @@ describe('test/app.test.js', () => {
     const errorContent = fs.readFileSync(
       path.join(logDir, 'aggregate-error.json.log'), 'utf-8');
     assert(logContent.match(/@appname/).length > 0);
+    console.log('logContent = ', logContent);
+    assert(logContent.match(/@region/).length > 0);
     assert(logContent.match(/this is a info/).length > 0);
     assert(logContent.match(/this is test error/) === null);
     assert(errorContent.match(/this is test error/).length > 0);
