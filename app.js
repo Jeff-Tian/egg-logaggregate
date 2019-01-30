@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 // TODO: Delete this file in next version
-const FileTransport = require('egg-logger').FileTransport;
-const aliSlsLogTo = require('./aliSlsLogTo');
+const FileTransport = require("egg-logger").FileTransport;
+const aliSlsLogTo = require("./aliSlsLogTo");
 
 module.exports = app => {
   class AggregateTransport extends FileTransport {
     log(level, args, meta) {
-      if (level !== 'ERROR') {
+      if (level !== "ERROR") {
         aliSlsLogTo(app, this.options.file)(level, args, meta);
       }
     }
@@ -19,11 +19,20 @@ module.exports = app => {
   }
 
   app.beforeStart(async () => {
-    app.getLogger('aliSlsLogger').set('aggregate', new AggregateTransport(
-      { level: 'INFO', file: app.config.logaggregate.path }));
+    app.getLogger("aliSlsLogger").set(
+      "aggregate",
+      new AggregateTransport({
+        level: "INFO",
+        file: app.config.logaggregate.path
+      })
+    );
 
-    app.getLogger('errorLogger')
-      .set('aggregateError', new AggregateErrorTransport(
-        { level: 'ERROR', file: app.config.logaggregate.errorPath }));
+    app.getLogger("errorLogger").set(
+      "aggregateError",
+      new AggregateErrorTransport({
+        level: "ERROR",
+        file: app.config.logaggregate.errorPath
+      })
+    );
   });
 };
