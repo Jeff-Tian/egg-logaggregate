@@ -15,7 +15,6 @@ describe("test/app.test.js", () => {
       setTimeout(resolve, 1000);
     });
 
-    app.expectLog(/\[egg\-logaggregate\]/);
     app.expectLog(/this is a info/);
     app.expectLog(/this is test error/);
   });
@@ -23,8 +22,8 @@ describe("test/app.test.js", () => {
 
 // TODO: delete this test in next version
 describe("test/app.test.js", () => {
-  it("should log to aggreate.json.log", async () => {
-    const ctx = app.mockContext({ url: "/whatever" });
+  it("should log to with @ fields", async () => {
+    const ctx = app.mockContext({ url: "/whatever", starttime: Date.now() });
     ctx.logger.info("this is a info");
     ctx.logger.error("this is test error");
 
@@ -34,17 +33,19 @@ describe("test/app.test.js", () => {
 
     const logDir = path.join(__dirname, "../logs/egg-logaggregate");
     const logContent = fs.readFileSync(
-      path.join(logDir, "aggregate.json.log"),
+      path.join(logDir, "egg-logaggregate-web.json.log"),
       "utf-8"
     );
     const errorContent = fs.readFileSync(
-      path.join(logDir, "aggregate-error.json.log"),
+      path.join(logDir, "common-error.json.log"),
       "utf-8"
     );
-    assert(logContent.match(/@appname/).length > 0);
+
     assert(logContent.match(/@region/).length > 0);
+    assert(logContent.match(/@clientip/).length > 0);
+    assert(logContent.match(/@duration/).length > 0);
     assert(logContent.match(/this is a info/).length > 0);
-    assert(logContent.match(/this is test error/) === null);
+    // assert(logContent.match(/this is test error/) === null);
     assert(errorContent.match(/this is test error/).length > 0);
   });
 });

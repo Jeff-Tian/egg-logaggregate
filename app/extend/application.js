@@ -16,12 +16,10 @@ class ContextLogger {
   }
 
   contextFormatter(meta) {
-    const { ctx, date, level, pid, message } = meta;
-    return `[${meta["@appname"]}] [${meta["@env"]}] [${meta["@region"]}] [${
-      meta["@servername"]
-    }] [${meta["@timestamp"]}] [${date}] [${pid}] [${level}] [${
-      ctx.url
-    }] ${message}`;
+    const { date, level, pid, message, url } = meta;
+    return `[${meta["@env"]}] [${meta["@region"]}] [${meta["@servername"]}] [${
+      meta["@timestamp"]
+    }] [${date}] [${pid}] [${level}] [${url}] ${message}`;
   }
 }
 
@@ -29,13 +27,25 @@ class ContextLogger {
   const LEVEL = level.toUpperCase();
   ContextLogger.prototype[level] = function() {
     const meta = {
-      ctx: this.ctx,
       formatter: this._logger.options.contextFormatter || this.contextFormatter,
-      "@appname": this.ctx.app.name,
       "@env": this.ctx.app.env,
-      "@servername": this.ctx.hostname,
+      "@servername": this.ctx.hostname || this.ctx.host,
       "@timestamp": new Date(),
-      "@region": process.env.REGION || null
+      "@region": process.env.REGION || null,
+      "@clientip": this.ctx.request.ip,
+      "@serverip": "todo",
+      "@duration": this.ctx.starttime ? Date.now() - this.ctx.starttime : 0,
+      event: "todo",
+      controller: this.ctx.controller,
+      method: "todo",
+      url: this.ctx.url,
+      request: {
+        query: this.ctx.query,
+        params: this.ctx.params,
+        body: this.ctx.body
+      },
+      response: this.ctx.body,
+      status: this.ctx.status
     };
     this._logger.log(LEVEL, arguments, meta);
   };
