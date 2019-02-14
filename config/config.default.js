@@ -8,13 +8,15 @@ module.exports = appInfo => {
 
   const logDir = path.join(appInfo.root, "logs", appInfo.name);
 
-  config.logger = {
-    ...config.logger,
-    outputJSON: true
+  config.logaggregate = {
+    commonLogPath: path.join(logDir, "common.json.log")
   };
 
-  config.logaggregate = {
-    commonLogPath: `${path.join(logDir, "common.json.log")}`
+  config.customLogger = {
+    requestLogger: {
+      file: path.join(logDir, "request.json.log"),
+      contextFormatter: meta => JSON.stringify(meta)
+    }
   };
 
   return config;

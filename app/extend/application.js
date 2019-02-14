@@ -28,8 +28,8 @@ class ContextLogger {
 
   contextFormatter(meta) {
     const { date, level, pid, message, url } = meta;
-    return `[${meta["@env"]}] [${meta["@region"]}] [${meta["@servername"]}] [${
-      meta["@timestamp"]
+    return `[${meta["@env"]}] [${meta["@region"]}] [${
+      meta["@servername"]
     }] [${date}] [${pid}] [${level}] [${url}] ${message}`;
   }
 }
@@ -46,8 +46,6 @@ class ContextLogger {
       const the3rdLine = ex.stack.indexOf("\n", the2ndLine + 1);
       const the4thLine = ex.stack.indexOf("\n", the3rdLine + 1);
       controller = ex.stack.substring(the3rdLine + 1, the4thLine).trim();
-
-      console.error(controller);
     }
 
     const meta = {

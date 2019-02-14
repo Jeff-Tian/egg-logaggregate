@@ -19,4 +19,8 @@ module.exports = app => {
       })
     );
   });
+
+  if (app.config.coreMiddleware.indexOf("requestLog") < 0) {
+    app.config.coreMiddleware.push("requestLog");
+  }
 };

@@ -54,5 +54,13 @@ describe("mock controller test", () => {
 
     app.expectLog(/bar info/);
     app.expectLog(/bar error/);
+
+    const logDir = app.config.customLogger.requestLogger.file;
+    const logContent = fs.readFileSync(logDir, "utf-8");
+    assert(logContent.match(/@region/).length > 0);
+    assert(logContent.match(/@clientip/).length > 0);
+    assert(logContent.match(/@duration/).length > 0);
+    assert(logContent.match(/response/).length > 0);
+    assert(logContent.match(/status/).length > 0);
   });
 });
