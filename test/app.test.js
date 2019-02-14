@@ -32,11 +32,7 @@ describe("test/app.test.js", () => {
 
     const logDir = path.join(__dirname, "../logs/egg-logaggregate");
     const logContent = fs.readFileSync(
-      path.join(logDir, "egg-logaggregate-web.json.log"),
-      "utf-8"
-    );
-    const errorContent = fs.readFileSync(
-      path.join(logDir, "common-error.json.log"),
+      path.join(logDir, "common.json.log"),
       "utf-8"
     );
 
@@ -44,7 +40,6 @@ describe("test/app.test.js", () => {
     assert(logContent.match(/@clientip/).length > 0);
     assert(logContent.match(/@duration/).length > 0);
     assert(logContent.match(/this is a info/).length > 0);
-    // assert(logContent.match(/this is test error/) === null);
-    assert(errorContent.match(/this is test error/).length > 0);
+    assert(logContent.match(/this is test error/).length > 0);
   });
 });
