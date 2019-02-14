@@ -5,7 +5,7 @@ const path = require("path");
 const { app } = require("egg-mock/bootstrap");
 const assert = require("power-assert");
 
-describe("test/app.test.js", () => {
+describe("default test/app.test.js", () => {
   it("should change default log fields", async () => {
     const ctx = app.mockContext({ url: "/whatever" });
     ctx.logger.info("this is a info");
@@ -20,7 +20,6 @@ describe("test/app.test.js", () => {
   });
 });
 
-// TODO: delete this test in next version
 describe("test/app.test.js", () => {
   it("should log to with @ fields", async () => {
     const ctx = app.mockContext({ url: "/whatever", starttime: Date.now() });

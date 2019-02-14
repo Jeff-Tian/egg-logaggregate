@@ -2,3 +2,4 @@
 node_modules
 logs
 run
+test/fixtures/apps/app-ts/**/*.js

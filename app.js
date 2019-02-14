@@ -27,6 +27,14 @@ module.exports = app => {
       })
     );
 
+    app.getLogger("logger").set(
+      "aggregate",
+      new AggregateErrorTransport({
+        level: "INFO",
+        file: app.config.logaggregate.path
+      })
+    );
+
     app.getLogger("errorLogger").set(
       "aggregateError",
       new AggregateErrorTransport({
