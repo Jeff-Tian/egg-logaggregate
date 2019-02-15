@@ -1,6 +1,6 @@
 # egg-logaggregate
 
-> aggregate egg project's logs to [Ali sls console](https://sls.console.aliyun.com).
+> Aggregate egg logs into 2 categories: common logs and request logs.
 
 [![NPM version][npm-image]][npm-url]
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/Jeff-Tian/egg-logaggregate)
@@ -21,22 +21,20 @@
 
 ## Why?
 
-Aggregate egg app log and error log into a single file, which uses a dedicated json format, so that it can be easily
-integrated with [Ali sls console](https://sls.console.aliyun.com).
+Aggregate egg logs into 2 categories:
 
-![Ali Sls console](./ali-sls.png)
+- common logs: common.json.log
+- request logs: request.json.log
 
 ## How?
 
-It adds extra log transports which append extra fields to the log file in json format:
+It adds extra log transports which also append extra fields to the log file in json format:
 
 - @env
-- @appname
 - @timestamp
 - @servername
 - @region
-
-By appending these extra fields, the Ali sls console can display the project logs.
+- ...
 
 ## Installation
 
