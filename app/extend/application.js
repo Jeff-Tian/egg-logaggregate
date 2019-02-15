@@ -57,7 +57,7 @@ class ContextLogger {
       "@clientip": this.ctx.ip,
       "@serverip": networkAddress.address,
       "@duration": this.ctx.starttime ? Date.now() - this.ctx.starttime : 0,
-      event: arguments[1],
+      event: arguments[0],
       controller,
       method: this.ctx.method,
       url: this.ctx.url,
@@ -67,6 +67,16 @@ class ContextLogger {
         body: this.ctx.request.body
       }
     };
+
+    if (
+      this._logger.options.file ===
+      this.ctx.app.config.customLogger.requestLogger.file
+    ) {
+      meta.response = this.ctx.body;
+      meta.status = this.ctx.status;
+      meta.event = "request";
+    }
+
     this._logger.log(LEVEL, arguments, meta);
   };
 });
