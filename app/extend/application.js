@@ -42,10 +42,11 @@ class ContextLogger {
     try {
       throw error;
     } catch (ex) {
-      const the2ndLine = ex.stack.indexOf("\n");
-      const the3rdLine = ex.stack.indexOf("\n", the2ndLine + 1);
-      const the4thLine = ex.stack.indexOf("\n", the3rdLine + 1);
-      controller = ex.stack.substring(the3rdLine + 1, the4thLine).trim();
+      // const the2ndLine = ex.stack.indexOf("\n");
+      // const the3rdLine = ex.stack.indexOf("\n", the2ndLine + 1);
+      // const the4thLine = ex.stack.indexOf("\n", the3rdLine + 1);
+      // controller = ex.stack.substring(the3rdLine + 1, the4thLine).trim();
+      controller = ex.stack;
     }
 
     const meta = {
