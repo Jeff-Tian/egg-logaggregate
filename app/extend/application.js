@@ -37,36 +37,18 @@ class ContextLogger {
 ["error", "warn", "info", "debug"].forEach(level => {
   const LEVEL = level.toUpperCase();
   ContextLogger.prototype[level] = function() {
-    const error = new Error();
-    let controller = "";
-    try {
-      throw error;
-    } catch (ex) {
-      // const the2ndLine = ex.stack.indexOf("\n");
-      // const the3rdLine = ex.stack.indexOf("\n", the2ndLine + 1);
-      // const the4thLine = ex.stack.indexOf("\n", the3rdLine + 1);
-      // controller = ex.stack.substring(the3rdLine + 1, the4thLine).trim();
-      controller = ex.stack;
-    }
-
     const meta = {
       formatter: this._logger.options.contextFormatter || this.contextFormatter,
       "@env": this.ctx.app.env,
-      "@servername": this.ctx.hostname || this.ctx.host || os.hostname,
+      "@servername": os.hostname,
       "@timestamp": new Date(),
       "@region": process.env.REGION || null,
       "@clientip": this.ctx.ip,
       "@serverip": networkAddress.address,
       "@duration": this.ctx.starttime ? Date.now() - this.ctx.starttime : 0,
       event: arguments[0],
-      controller,
       method: this.ctx.method,
-      url: this.ctx.url,
-      request: {
-        query: this.ctx.query,
-        params: this.ctx.params,
-        body: this.ctx.request.body
-      }
+      url: this.ctx.url
     };
 
     if (
@@ -76,6 +58,11 @@ class ContextLogger {
       meta.response = this.ctx.body;
       meta.status = this.ctx.status;
       meta.event = "request";
+      meta.controller = "unknown";
+      meta.request = {
+        params: this.ctx.params,
+        body: this.ctx.request.body
+      };
     }
 
     this._logger.log(LEVEL, arguments, meta);

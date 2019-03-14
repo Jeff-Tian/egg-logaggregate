@@ -15,7 +15,38 @@ module.exports = appInfo => {
   config.customLogger = {
     requestLogger: {
       file: path.join(logDir, "request.json.log"),
-      contextFormatter: meta => JSON.stringify(meta)
+      contextFormatter: meta =>
+        JSON.stringify(
+          (({
+            method,
+            controller,
+            request,
+            status,
+            url,
+            response,
+            "@region": region,
+            "@clientip": clientIp,
+            "@duration": duration,
+            "@env": env,
+            "@serverip": serverIp,
+            "@servername": serverName,
+            "@timestamp": timestamp
+          }) => ({
+            method,
+            controller,
+            request,
+            status,
+            url,
+            response,
+            "@region": region,
+            "@clientip": clientIp,
+            "@duration": duration,
+            "@env": env,
+            "@serverip": serverIp,
+            "@servername": serverName,
+            "@timestamp": timestamp
+          }))(meta)
+        )
     }
   };
 

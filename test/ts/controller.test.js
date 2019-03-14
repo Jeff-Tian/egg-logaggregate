@@ -57,10 +57,12 @@ describe("mock controller test", () => {
 
     const logDir = app.config.customLogger.requestLogger.file;
     const logContent = fs.readFileSync(logDir, "utf-8");
+    console.log("content = ", logContent);
     assert(logContent.match(/@region/).length > 0);
     assert(logContent.match(/@clientip/).length > 0);
     assert(logContent.match(/@duration/).length > 0);
     assert(logContent.match(/response/).length > 0);
     assert(logContent.match(/status/).length > 0);
+    assert(!logContent.match(/hostname/));
   });
 });
