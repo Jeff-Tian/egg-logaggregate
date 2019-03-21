@@ -58,7 +58,7 @@ class ContextLogger {
       meta.response = this.ctx.body;
       meta.status = this.ctx.status;
       meta.event = "request";
-      meta.controller = this.ctx.routerPath;
+      meta.controller = this.ctx.routerName;
       meta.request = {
         params: this.ctx.params,
         body: this.ctx.request.body
