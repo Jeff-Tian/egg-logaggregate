@@ -40,7 +40,7 @@ class ContextLogger {
     const meta = {
       formatter: this._logger.options.contextFormatter || this.contextFormatter,
       "@env": this.ctx.app.env,
-      "@servername": os.hostname,
+      "@servername": os.hostname(),
       "@timestamp": new Date(),
       "@region": process.env.REGION || null,
       "@clientip": this.ctx.ip,

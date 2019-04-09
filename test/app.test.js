@@ -39,6 +39,7 @@ describe("test/app.test.js", () => {
     assert(logContent.match(/@region/).length > 0);
     assert(logContent.match(/@clientip/).length > 0);
     assert(logContent.match(/@duration/).length > 0);
+    assert(logContent.match(/@servername/).length > 0);
     assert(logContent.match(/this is a info/).length > 0);
     assert(logContent.match(/this is test error/).length > 0);
   });
