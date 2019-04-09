@@ -66,7 +66,9 @@ class ContextLogger {
       meta["@duration"] = this.ctx.starttime
         ? Date.now() - this.ctx.starttime
         : 0;
-      meta["@clientip"] = this.ctx.ip;
+      meta["@clientip"] = this.ctx.headers["x-forwarded-for"]
+        ? this.ctx.headers["x-forwarded-for"].split(",")[0]
+        : this.ctx.ip;
       meta.url = this.ctx.url;
     }
 
