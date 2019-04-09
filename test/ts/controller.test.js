@@ -65,5 +65,6 @@ describe("mock controller test", () => {
     assert(logContent.match(/status/).length > 0);
     assert(logContent.match(/@servername/).length > 0);
     assert(!logContent.match(/hostname/));
+    assert(!logContent.match(/event/));
   });
 });

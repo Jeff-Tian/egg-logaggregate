@@ -45,9 +45,10 @@ class ContextLogger {
       "@region": process.env.REGION || null,
       "@serverip": networkAddress.address,
       event: arguments[0],
-      method: this.ctx.method,
-      url: this.ctx.url
+      method: this.ctx.method
     };
+
+    meta.args = undefined;
 
     if (
       this._logger.options.file ===
@@ -55,7 +56,7 @@ class ContextLogger {
     ) {
       meta.response = this.ctx.body;
       meta.status = this.ctx.status;
-      meta.event = "request";
+      delete meta.event;
       meta.controller = this.ctx.routerName;
       meta.request = {
         params: this.ctx.params,
@@ -66,6 +67,7 @@ class ContextLogger {
         ? Date.now() - this.ctx.starttime
         : 0;
       meta["@clientip"] = this.ctx.ip;
+      meta.url = this.ctx.url;
     }
 
     this._logger.log(LEVEL, arguments, meta);
