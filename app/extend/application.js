@@ -43,9 +43,7 @@ class ContextLogger {
       "@servername": os.hostname(),
       "@timestamp": new Date(),
       "@region": process.env.REGION || null,
-      "@clientip": this.ctx.ip,
       "@serverip": networkAddress.address,
-      "@duration": this.ctx.starttime ? Date.now() - this.ctx.starttime : 0,
       event: arguments[0],
       method: this.ctx.method,
       url: this.ctx.url
@@ -63,6 +61,11 @@ class ContextLogger {
         params: this.ctx.params,
         body: this.ctx.request.body
       };
+
+      meta["@duration"] = this.ctx.starttime
+        ? Date.now() - this.ctx.starttime
+        : 0;
+      meta["@clientip"] = this.ctx.ip;
     }
 
     this._logger.log(LEVEL, arguments, meta);
