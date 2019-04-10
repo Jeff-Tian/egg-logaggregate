@@ -18,7 +18,6 @@ module.exports = appInfo => {
       contextFormatter: meta =>
         JSON.stringify(
           (({
-            method,
             controller,
             request,
             status,
@@ -32,7 +31,6 @@ module.exports = appInfo => {
             "@servername": serverName,
             "@timestamp": timestamp
           }) => ({
-            method,
             controller,
             request,
             status,
