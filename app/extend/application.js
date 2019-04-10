@@ -43,12 +43,13 @@ class ContextLogger {
       "@servername": os.hostname(),
       "@timestamp": new Date(),
       "@region": process.env.REGION || null,
-      "@serverip": networkAddress.address,
-      event: arguments[0],
-      method: this.ctx.method
+      "@serverip": networkAddress.address
     };
 
     meta.args = undefined;
+    meta.pid = undefined;
+    meta.hostname = undefined;
+    meta.date = undefined;
 
     if (
       this._logger.options.file ===
@@ -62,6 +63,7 @@ class ContextLogger {
         params: this.ctx.params,
         body: this.ctx.request.body
       };
+      meta.method = this.ctx.method;
 
       meta["@duration"] = this.ctx.starttime
         ? Date.now() - this.ctx.starttime
