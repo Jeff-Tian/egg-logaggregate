@@ -4,6 +4,8 @@ module.exports = () => {
   return async (ctx, next) => {
     await next();
 
-    ctx.getLogger("requestLogger").info();
+    if (ctx.url !== "/") {
+      ctx.getLogger("requestLogger").info();
+    }
   };
 };
