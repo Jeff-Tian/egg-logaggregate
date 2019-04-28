@@ -1,6 +1,6 @@
 {
   "name": "egg-logaggregate",
-  "version": "4.1.11",
+  "version": "4.1.12",
   "eggPlugin": {
     "name": "logaggregate",
     "dependencies": []

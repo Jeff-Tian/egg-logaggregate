@@ -57,6 +57,7 @@ class ContextLogger {
     ) {
       meta.response = this.ctx.body;
       meta.status = this.ctx.status;
+      meta.session = this.ctx.session;
       delete meta.event;
       meta.controller = this.ctx.routerName;
       meta.request = {
