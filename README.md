@@ -9,6 +9,7 @@
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
+[![Git commit with emojis!](https://img.shields.io/badge/gitmoji-git%20commit%20with%20emojis!-brightgreen.svg)](https://gitmoji.js.org)
 
 [npm-image]: https://img.shields.io/npm/v/egg-logaggregate.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-logaggregate

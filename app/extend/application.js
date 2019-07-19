@@ -73,6 +73,8 @@ class ContextLogger {
         ? this.ctx.headers["x-forwarded-for"].split(",")[0]
         : this.ctx.ip;
       meta.url = this.ctx.url;
+
+      meta["content-type"] = this.ctx.headers["content-type"];
     }
 
     this._logger.log(LEVEL, arguments, meta);

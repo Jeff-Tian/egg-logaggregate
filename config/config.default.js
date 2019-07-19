@@ -4,7 +4,6 @@ const path = require("path");
 
 module.exports = appInfo => {
   const config = {};
-  config.keys = "1234";
 
   const logDir = path.join(appInfo.root, "logs", appInfo.name);
 
@@ -29,7 +28,9 @@ module.exports = appInfo => {
             "@env": env,
             "@serverip": serverIp,
             "@servername": serverName,
-            "@timestamp": timestamp
+            "@timestamp": timestamp,
+            "content-type": contentType,
+            method
           }) => ({
             controller,
             request,
@@ -42,7 +43,9 @@ module.exports = appInfo => {
             "@env": env,
             "@serverip": serverIp,
             "@servername": serverName,
-            "@timestamp": timestamp
+            "@timestamp": timestamp,
+            "content-type": contentType,
+            method
           }))(meta)
         )
     }
