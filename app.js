@@ -1,23 +1,16 @@
 "use strict";
 
-const FileTransport = require("egg-logger").FileTransport;
-const aliSlsLogTo = require("./aliSlsLogTo");
-
 module.exports = app => {
-  class AggregateTransport extends FileTransport {
-    log(level, args, meta) {
-      aliSlsLogTo(app, this.options.file)(level, args, meta);
-    }
-  }
-
   app.beforeStart(async () => {
-    app.getLogger("logger").set(
-      "aggregate",
-      new AggregateTransport({
-        level: "INFO",
-        file: app.config.logaggregate.commonLogPath
-      })
-    );
+    // console.log("app config = ", app.config);
+    // app.getLogger("logger").set(
+    //   "aggregate",
+    //   new AggregateTransport({
+    //     level: "INFO",
+    //     file: app.config.logaggregate.commonLogPath,
+    //     formatter: meta => JSON.stringify({ xxx: "yyy", ...meta })
+    //   })
+    // );
   });
 
   if (app.config.coreMiddleware.indexOf("requestLog") < 0) {

@@ -7,7 +7,7 @@ module.exports = function aliSlsLogTo(app, file) {
       file,
       JSON.stringify({
         level,
-        args,
+        message: args[0],
         ...meta
       }) + "\n",
       () => {}

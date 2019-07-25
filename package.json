@@ -1,6 +1,6 @@
 {
   "name": "egg-logaggregate",
-  "version": "4.1.14",
+  "version": "5.0.0",
   "eggPlugin": {
     "name": "logaggregate",
     "dependencies": []
@@ -44,7 +44,8 @@
     "webstorm-disable-index": "^1.2.0"
   },
   "dependencies": {
-    "egg": "^2.14.2"
+    "egg": "^2.15.1",
+    "egg-logger": "latest"
   },
   "husky": {
     "hooks": {
