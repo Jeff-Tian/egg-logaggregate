@@ -80,7 +80,8 @@ module.exports = appInfo => {
   config.customLogger = {
     requestLogger: {
       file: path.join(logDir, "request.json.log"),
-      contextFormatter: formatter
+      contextFormatter: formatter,
+      excludeUrls: ["/"]
     }
   };
 
