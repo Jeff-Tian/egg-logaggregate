@@ -5,7 +5,7 @@ module.exports = () => {
     await next();
 
     if (
-      (ctx.config.customLogger.requestLogger.excludeUrls || []).indexOf(
+      (ctx.app.config.customLogger.requestLogger.excludeUrls || []).indexOf(
         ctx.url
       ) < 0
     ) {

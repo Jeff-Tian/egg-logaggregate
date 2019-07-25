@@ -1,6 +1,6 @@
 {
   "name": "egg-logaggregate",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "eggPlugin": {
     "name": "logaggregate",
     "dependencies": []
@@ -23,7 +23,8 @@
     "postversion": "git push && git push --tags",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepublishOnly": "npm test"
   },
   "devDependencies": {
     "egg-bin": "^4.10.0",
