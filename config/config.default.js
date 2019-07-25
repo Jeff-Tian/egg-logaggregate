@@ -16,7 +16,11 @@ const networkAddress = networks.find(n => n.family === "IPv4");
 module.exports = appInfo => {
   const config = {};
 
-  const logDir = path.join(appInfo.root, "logs", appInfo.name);
+  const logDir = path.join(
+    appInfo.root || __dirname + "/..",
+    "logs",
+    appInfo.name
+  );
 
   const formatter = meta =>
     JSON.stringify(
