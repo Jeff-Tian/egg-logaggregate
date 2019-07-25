@@ -68,6 +68,7 @@ module.exports = appInfo => {
 
   config.logger = {
     formatter,
+    contextFormatter: formatter,
     appLogName: `common.json.log`,
     outputJSON: false
   };
