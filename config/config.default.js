@@ -39,7 +39,8 @@ module.exports = appInfo => {
         "@timestamp": timestamp,
         "content-type": contentType,
         method,
-        message
+        message,
+        level
       }) => ({
         controller,
         request,
@@ -55,7 +56,8 @@ module.exports = appInfo => {
         "@timestamp": timestamp,
         "content-type": contentType,
         method,
-        message
+        message,
+        level
       }))({
         "@env": appInfo.env,
         "@servername": os.hostname(),
@@ -70,11 +72,10 @@ module.exports = appInfo => {
     formatter,
     contextFormatter: formatter,
     appLogName: `common.json.log`,
+    coreLogName: "common.json.log",
+    agentLogName: "common.json.log",
+    errorLogName: "common.json.log",
     outputJSON: false
-  };
-
-  config.logaggregate = {
-    commonLogPath: path.join(logDir, "common.json.log")
   };
 
   config.customLogger = {
@@ -82,6 +83,9 @@ module.exports = appInfo => {
       file: path.join(logDir, "request.json.log"),
       contextFormatter: formatter,
       excludeUrls: ["/"]
+    },
+    scheduleLogger: {
+      file: `common.json.log`
     }
   };
 
