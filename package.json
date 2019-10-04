@@ -23,7 +23,9 @@
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "lint": "eslint .",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "egg-bin": "^4.10.0",
@@ -45,7 +47,8 @@
   },
   "dependencies": {
     "egg": "^2.15.1",
-    "egg-logger": "latest"
+    "egg-logger": "latest",
+    "snyk": "^1.230.5"
   },
   "husky": {
     "hooks": {
@@ -61,5 +64,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Jeff-Tian/egg-logaggregate"
-  }
+  },
+  "snyk": true
 }
