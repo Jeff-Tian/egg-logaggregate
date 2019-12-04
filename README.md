@@ -2,6 +2,7 @@
 
 > Aggregate egg logs into 2 categories: common logs and request logs.
 
+[![Build Status](https://travis-ci.com/Jeff-Tian/egg-logaggregate.svg?branch=master)](https://travis-ci.com/Jeff-Tian/egg-logaggregate)
 [![NPM version][npm-image]][npm-url]
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/Jeff-Tian/egg-logaggregate)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1a14b40b7d69e5d08897/maintainability)](https://codeclimate.com/github/Jeff-Tian/egg-logaggregate/maintainability)

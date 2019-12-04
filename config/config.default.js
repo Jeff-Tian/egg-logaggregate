@@ -4,12 +4,11 @@ const path = require("path");
 
 const os = require("os");
 const networkInterfaces = os.networkInterfaces();
-const networks =
-  networkInterfaces.eth0 ||
+const networks = networkInterfaces.eth0 ||
   networkInterfaces.eth1 ||
   networkInterfaces.en0 ||
   networkInterfaces.en1 ||
-  networkInterfaces.本地连接;
+  networkInterfaces.本地连接 || { find: () => [] };
 
 const networkAddress = networks.find(n => n.family === "IPv4");
 
