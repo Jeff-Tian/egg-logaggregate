@@ -94,13 +94,15 @@ module.exports = appInfo => {
   const requestFormatter = meta =>
     JSON.stringify({ ...common(), ...requestExtra(meta) });
 
+  const logName = `common.json.log`;
+
   config.logger = {
     formatter,
     contextFormatter: formatter,
-    appLogName: `common.json.log`,
-    coreLogName: "common.json.log",
-    agentLogName: "common.json.log",
-    errorLogName: "common.json.log",
+    appLogName: logName,
+    coreLogName: logName,
+    agentLogName: logName,
+    errorLogName: logName,
     outputJSON: false
   };
 
@@ -111,7 +113,7 @@ module.exports = appInfo => {
       excludeUrls: ["/", "/health"]
     },
     scheduleLogger: {
-      file: `common.json.log`
+      file: logName
     }
   };
 
