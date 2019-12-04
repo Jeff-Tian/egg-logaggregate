@@ -1,14 +1,17 @@
 "use strict";
 
+const R = require("ramda");
+
 module.exports = () => {
   return async (ctx, next) => {
     try {
       await next();
 
       if (
-        (ctx.app.config.customLogger.requestLogger.excludeUrls || []).indexOf(
-          ctx.url
-        ) < 0
+        !R.includes(
+          ctx.url,
+          ctx.app.config.customLogger.requestLogger.excludeUrls || []
+        )
       ) {
         ctx.getLogger("requestLogger").info();
       }
