@@ -22,7 +22,9 @@ class AppBootHook {
     };
 
     if (app.config.coreMiddleware.indexOf("requestLog") < 0) {
-      app.config.coreMiddleware.push("requestLog");
+      app.config.coreMiddleware = ["requestLog"].concat(
+        app.config.coreMiddleware
+      );
     }
   }
 

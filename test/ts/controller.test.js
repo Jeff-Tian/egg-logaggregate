@@ -10,6 +10,7 @@ const baseDir = path.join(__dirname, "../fixtures/apps/app-ts");
 const fs = require("fs");
 const mkdirp = require("mz-modules/mkdirp");
 const rimraf = require("mz-modules/rimraf");
+const sleep = require("../../helpers/sleep");
 
 describe("mock controller test", () => {
   before(async () => {
@@ -43,14 +44,13 @@ describe("mock controller test", () => {
   });
 
   it("should log controller name", async () => {
-    request(app.callback())
+    const res = await request(app.callback())
       .get("/foo")
-      .expect(200)
-      .expect("bar", err => {
-        assert(!err);
-      });
+      .expect(200);
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    assert(res.text === "bar");
+
+    await sleep(1);
 
     app.expectLog(/bar info/);
     app.expectLog(/bar error/);
@@ -67,5 +67,28 @@ describe("mock controller test", () => {
     assert(!logContent.match(/hostname/));
     assert(!logContent.match(/event/));
     assert(logContent.match(/method/).length > 0);
+  });
+
+  it("should log 400 status code", async () => {
+    await request(app.callback())
+      .get("/foo-bar")
+      .send({})
+      .expect(400);
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const logDir = app.config.customLogger.requestLogger.file;
+    const logContent = fs.readFileSync(logDir, "utf-8");
+    console.log("content of threw bar = ", logContent);
+    assert(logContent.match(/@region/).length > 0);
+    assert(logContent.match(/@clientip/).length > 0);
+    assert(logContent.match(/@duration/).length > 0);
+    assert(logContent.match(/status/).length > 0);
+    assert(logContent.match(/"status":400/).length > 0);
+    assert(logContent.match(/@servername/).length > 0);
+    assert(!logContent.match(/hostname/));
+    assert(!logContent.match(/event/));
+    assert(logContent.match(/method/).length > 0);
+    assert(logContent.match(/error/).length > 0);
   });
 });

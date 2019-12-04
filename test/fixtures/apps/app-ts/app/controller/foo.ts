@@ -15,4 +15,10 @@ export default class FooController extends Controller {
     this.ctx.stauts = 200;
     this.ctx.body = "bar";
   }
+
+  async throwBar() {
+    this.ctx.logger.info("before throw ");
+    this.ctx.throw(400);
+    this.ctx.logger.info("after throw");
+  }
 }

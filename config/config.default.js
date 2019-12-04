@@ -45,7 +45,8 @@ module.exports = appInfo => {
       ? meta.ctx.headers["x-forwarded-for"].split(",")[0]
       : meta.ctx.ip,
     url: meta.ctx.url,
-    "content-type": meta.ctx.headers["content-type"]
+    "content-type": meta.ctx.headers["content-type"],
+    error: meta.ctx.error || undefined
   });
 
   const filter = ({
@@ -108,7 +109,7 @@ module.exports = appInfo => {
     requestLogger: {
       file: path.join(logDir, "request.json.log"),
       contextFormatter: requestFormatter,
-      excludeUrls: ["/"]
+      excludeUrls: ["/", "/health"]
     },
     scheduleLogger: {
       file: `common.json.log`
