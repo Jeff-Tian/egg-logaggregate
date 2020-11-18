@@ -41,7 +41,7 @@
     "supertest": "latest",
     "typescript": "^3.3.3",
     "webstorm-disable-index": "^1.2.0",
-    "semantic-release": "^15.13.31"
+    "semantic-release": "^17.2.3"
   },
   "dependencies": {
     "egg": "^2.15.1",
