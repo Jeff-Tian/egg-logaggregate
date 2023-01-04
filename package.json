@@ -25,7 +25,7 @@
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "egg-bin": "^4.10.0",
+    "egg-bin": "^4.20.0",
     "egg-mock": "^3.21.0",
     "eslint": "^5.12.0",
     "eslint-config-egg": "^7.1.0",
