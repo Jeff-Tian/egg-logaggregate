@@ -44,8 +44,8 @@
     "semantic-release": "^15.13.31"
   },
   "dependencies": {
-    "egg": "^2.15.1",
-    "egg-logger": "latest",
+    "egg": "^3.10.0",
+    "egg-logger": "3.0.0",
     "ramda": "^0.26.1"
   },
   "husky": {
